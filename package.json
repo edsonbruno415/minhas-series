@@ -1,0 +1,32 @@
+{
+  "name": "minhas-series",
+  "version": "1.0.0",
+  "description": "Projeto desenvolvido durante o curso Fullstack Master do DevPleno",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edsonbruno415/minhas-series.git"
+  },
+  "keywords": [
+    "Minhas",
+    "Series",
+    "Series",
+    "Entreterimento",
+    "CRUD"
+  ],
+  "author": "Edson Bruno",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edsonbruno415/minhas-series/issues"
+  },
+  "homepage": "https://github.com/edsonbruno415/minhas-series#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.10"
+  }
+}
