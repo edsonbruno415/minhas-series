@@ -1,2 +1,2 @@
-# minhas-series
-Projeto desenvolvido durante o curso Fullstack Master do DevPleno
+# Minhas Séries
+## Projeto desenvolvido durante o curso Fullstack Master do DevPleno
