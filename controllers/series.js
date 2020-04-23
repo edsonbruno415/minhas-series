@@ -1,5 +1,11 @@
 const Series = require('../models/series');
 
+const labels = {
+    'to-watch' : 'Para Assistir',
+    'watching' : 'Assistindo',
+    'watched' : 'Assistido'
+}
+
 const index = (req, res) => {
     Series.find({},(err, series )=>{
         if(err){
@@ -33,20 +39,19 @@ const createSerie = (req, res) => {
 }
 
 const createNewForm = (req, res) => {
-    res.render('form');
+    const serie = {
+        name: '',
+        status: ''
+    }
+    res.render('form', { action: 'create', serie , labels });
 }
 
 const createUpdateForm = (req, res) => {
-    const labels = {
-        'to-watch' : 'Para Assistir',
-        'watching' : 'Assistindo',
-        'watched' : 'Assistido'
-    }
     Series.findById(req.params.id, (err, serie)=>{
         if(err){
             console.log(err);
         }else{
-            res.render('form', { serie , labels });
+            res.render('form', { serie , labels, action : 'update'});
         }
     });
 }
