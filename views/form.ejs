@@ -4,6 +4,7 @@
     <div class="container">
         <% if( action === 'update') { %>
             <form method="POST" action="/series/editar-registro">
+            <input type="hidden" value="<%- serie.id %>" name="id">
         <% } else { %>
             <form method="POST" action="/series/novo-registro">
         <% } %>
