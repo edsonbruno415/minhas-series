@@ -5,12 +5,22 @@ const index = (req, res) => {
         if(err){
             console.error(err);
         }else{
-            console.log(series);
             res.render('series', { series });
         }
     });
-};
+}
+
+const deleteSerie = (req, res) => {
+    const { id } = req.params;
+    Series.deleteOne({ _id : id },(err)=>{
+        if(err){
+            console.error(err);
+        }
+    });
+    res.redirect('/series');
+}
 
 module.exports = {
-    index
+    index,
+    deleteSerie
 }
