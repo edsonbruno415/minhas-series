@@ -20,7 +20,25 @@ const deleteSerie = (req, res) => {
     res.redirect('/series');
 }
 
+const createSerie = (req, res) => {
+
+    Series.create(req.body, err => {
+        if(err){
+            console.log(error);
+        }
+        Series.find({}, (err, series) => {
+            res.render('series', { series });
+        });
+    });
+}
+
+const createNewForm = (req, res) => {
+    res.render('form');
+}
+
 module.exports = {
     index,
-    deleteSerie
+    deleteSerie,
+    createNewForm,
+    createSerie
 }
