@@ -5,14 +5,18 @@
         <form method="POST" action="/series/novo-registro">
             <div class="form-group">
               <label for="name">Nome da Serie</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome da serie">
+              <input value="<%- serie.name %>" type="text" class="form-control" id="name" name="name" placeholder="Digite o nome da serie">
             </div>
             <div class="form-group">
                 <label for="status">Status</label>
                 <select class="form-control" id="status" name="status">
-                    <option value="to-watch">Para Assistir</option>
-                    <option value="watching">Assistindo</option>
-                    <option value="watched">Assistido</option>
+                    <% for(let status in labels){ %>
+                        <% if(serie.status === status){ %>
+                            <option value="<%- status %>" selected><%- labels[status]%></option>
+                        <% }else { %>
+                            <option value="<%- status %>"><%- labels[status]%></option>
+                        <% } %>
+                    <% } %>
                 </select>
               </div>
             <button type="submit" class="btn btn-secondary">Submit</button>
