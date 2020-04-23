@@ -1,15 +1,28 @@
 <%- include('./partials/header') -%>
 <section id="about">
     <div class="container">
-        <h2>Series</h2> 
-        <ul>
-            <li>
-                <h3>Titulo Serie</h3>
-                <p>Assistindo/assistido/para assistir</p>
-                <button>Editar</button>
-                <button>Excluir</button>
-            </li>
-        </ul>
+        <h2>Series</h2>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Titulo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acoes</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% series.forEach( serie => { %>
+                    <tr scope="row">
+                        <td scope="col"><%- serie.name %></td>
+                        <td scope="col"><%- serie.status %></td>
+                        <td scope="col">
+                            <a href="/series/editar/<%- serie._id %>">Editar</a>
+                            <a href="/series/excluir/<%- serie._id %>">Excluir</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+          </table>
     </div>
 </section>
 <%- include('./partials/footer') -%>
