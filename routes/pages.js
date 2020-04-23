@@ -7,4 +7,5 @@ router.get('/sobre', (req, res) => res.render('sobre'));
 
 router.get('/series', (req, res) => res.render('series'));
 
+
 module.exports = router;
