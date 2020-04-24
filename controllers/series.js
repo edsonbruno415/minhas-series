@@ -9,12 +9,7 @@ const labels = {
 const index = async (req, res) => {
     const series = await Series.find({});
     for(let serie of series){
-        for(let status in labels){
-            if(serie.status === status){
-                serie.status = labels[status];
-                break;
-            }
-        }
+        serie.status = labels[serie.status];
     }
     res.render('series', { series });
 }
@@ -29,27 +24,18 @@ const createSerie = async (req, res) => {
     const resp = await Series.create(req.body);
     const series = await Series.find({});
     for(let serie of series){
-        for(let status in labels){
-            if(serie.status === status){
-                serie.status = labels[status];
-                break;
-            }
-        }
+        serie.status = labels[serie.status];
     }
     res.render('series', { series });
 }
 
 const createNewForm = (req, res) => {
-    const serie = {
-        name: '',
-        status: ''
-    }
-    res.render('form', { action: 'create', serie, labels });
+    res.render('createForm', { labels });
 }
 
 const createUpdateForm = async (req, res) => {
     const serie = await Series.findById(req.params.id);
-    res.render('form', { serie, labels, action: 'update' });
+    res.render('updateForm', { serie, labels });
 }
 
 const updateSerie = async (req, res) => {

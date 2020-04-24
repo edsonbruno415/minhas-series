@@ -1,13 +1,8 @@
 <%- include('./partials/header') -%>
-
 <section id="about">
     <div class="container">
-        <% if( action === 'update') { %>
             <form method="POST" action="/series/editar-registro">
             <input type="hidden" value="<%- serie.id %>" name="id">
-        <% } else { %>
-            <form method="POST" action="/series/novo-registro">
-        <% } %>
             <div class="form-group">
               <label for="name">Nome da Serie</label>
               <input value="<%- serie ? serie.name : '' %>" type="text" class="form-control" id="name" name="name" placeholder="Digite o nome da serie">
@@ -28,5 +23,4 @@
           </form>
     </div>
 </section>
-
 <%- include('./partials/footer') -%>
