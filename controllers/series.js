@@ -6,52 +6,37 @@ const labels = {
     'watched': 'Assistido'
 }
 
-const index = (req, res) => {
-    Series.find({}, (err, series) => {
-        if (err) {
-            console.error(err);
-        } else {
-            for(let serie of series){
-                for(let status in labels){
-                    if(serie.status === status){
-                        serie.status = labels[status];
-                        break;
-                    }
-                }
+const index = async (req, res) => {
+    const series = await Series.find({});
+    for(let serie of series){
+        for(let status in labels){
+            if(serie.status === status){
+                serie.status = labels[status];
+                break;
             }
-            res.render('series', { series });
         }
-    });
+    }
+    res.render('series', { series });
 }
 
-const deleteSerie = (req, res) => {
+const deleteSerie = async (req, res) => {
     const { id } = req.params;
-    Series.deleteOne({ _id: id }, (err) => {
-        if (err) {
-            console.error(err);
-        }
-    });
+    await Series.deleteOne({ _id: id });
     res.redirect('/series');
 }
 
-const createSerie = (req, res) => {
-
-    Series.create(req.body, err => {
-        if (err) {
-            console.log(error);
-        }
-        Series.find({}, (err, series) => {
-            for(let serie of series){
-                for(let status in labels){
-                    if(serie.status === status){
-                        serie.status = labels[status];
-                        break;
-                    }
-                }
+const createSerie = async (req, res) => {
+    const resp = await Series.create(req.body);
+    const series = await Series.find({});
+    for(let serie of series){
+        for(let status in labels){
+            if(serie.status === status){
+                serie.status = labels[status];
+                break;
             }
-            res.render('series', { series });
-        });
-    });
+        }
+    }
+    res.render('series', { series });
 }
 
 const createNewForm = (req, res) => {
@@ -62,27 +47,15 @@ const createNewForm = (req, res) => {
     res.render('form', { action: 'create', serie, labels });
 }
 
-const createUpdateForm = (req, res) => {
-    Series.findById(req.params.id, (err, serie) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('form', { serie, labels, action: 'update' });
-        }
-    });
+const createUpdateForm = async (req, res) => {
+    const serie = await Series.findById(req.params.id);
+    res.render('form', { serie, labels, action: 'update' });
 }
 
-const updateSerie = (req, res) => {
+const updateSerie = async (req, res) => {
     const { id, name, status } = req.body;
-    Series.updateOne({ _id: id },
-        { name: name, status: status },
-        (err, result) => {
-            if (err) {
-                console.error(err);
-            } else {
-                res.redirect('/series');
-            }
-        });
+    const resp = await Series.updateOne( { _id: id }, { name: name, status: status });
+    res.redirect('/series');
 }
 
 module.exports = {
