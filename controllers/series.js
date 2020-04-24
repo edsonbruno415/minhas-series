@@ -8,7 +8,7 @@ const labels = {
 
 const index = async (req, res) => {
     const series = await Series.find({});
-    for(let serie of series){
+    for (let serie of series) {
         serie.status = labels[serie.status];
     }
     res.render('series', { series });
@@ -21,16 +21,21 @@ const deleteSerie = async (req, res) => {
 }
 
 const createSerie = async (req, res) => {
-    const resp = await Series.create(req.body);
-    const series = await Series.find({});
-    for(let serie of series){
-        serie.status = labels[serie.status];
+    try {
+        await Series.create(req.body);
+        const series = await Series.find({});
+        for (let serie of series) {
+            serie.status = labels[serie.status];
+        }
+        res.render('series', { series });
+    } catch (error) {
+        error.message = `O campo nome é obrigatório.`
+        res.render('createForm', { labels , error });
     }
-    res.render('series', { series });
 }
 
 const createNewForm = (req, res) => {
-    res.render('createForm', { labels });
+    res.render('createForm', { labels, error : null });
 }
 
 const createUpdateForm = async (req, res) => {
@@ -40,7 +45,7 @@ const createUpdateForm = async (req, res) => {
 
 const updateSerie = async (req, res) => {
     const { id, name, status } = req.body;
-    const resp = await Series.updateOne( { _id: id }, { name: name, status: status });
+    const resp = await Series.updateOne({ _id: id }, { name: name, status: status });
     res.redirect('/series');
 }
 
