@@ -1,6 +1,6 @@
 # :tv: Minhas Séries :tv::family: 
 
-### Projeto desenvolvido durante o curso Fullstack Master do DevPleno
+### Projeto desenvolvido durante o curso Fullstack Master do @DevPleno
 
 ###### Requisitos para executar o projeto
 
