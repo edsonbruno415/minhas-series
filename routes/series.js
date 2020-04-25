@@ -8,5 +8,6 @@ router.get('/nova-serie', series.createNewForm);
 router.post('/novo-registro', series.createSerie);
 router.get('/editar/:id', series.createUpdateForm);
 router.post('/editar-registro', series.updateSerie);
+router.get('/sobre/:id', series.aboutSerie);
 
 module.exports = router;

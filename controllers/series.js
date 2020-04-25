@@ -49,11 +49,17 @@ const updateSerie = async (req, res) => {
     res.redirect('/series');
 }
 
+const aboutSerie = async (req, res) => {
+    const serie = await Series.findById(req.params.id);
+    res.render('sobre-serie', { serie });
+}
+
 module.exports = {
     index,
     deleteSerie,
     createNewForm,
     createSerie,
     createUpdateForm,
-    updateSerie
+    updateSerie,
+    aboutSerie
 }

@@ -13,7 +13,7 @@
             <tbody>
                 <% series.forEach( serie => { %>
                     <tr scope="row">
-                        <td scope="col"><%- serie.name %></td>
+                        <td scope="col"><a href="/series/sobre/<%- serie._id %>"><%- serie.name %></a></td>
                         <td scope="col"><%- serie.status %></td>
                         <td scope="col">
                             <a href="/series/editar/<%- serie._id %>">Editar</a>
