@@ -1,7 +1,7 @@
 <%- include('./partials/header') -%>
 <section id="about">
     <div class="container">
-        <h2>Series</h2><a href="/series/nova-serie">Adicionar Nova</a>
+        <h2>Series</h2><a class="btn btn-secondary m-3" role="button" href="/series/nova-serie">Adicionar Nova</a>
         <table class="table table-hover">
             <thead>
               <tr>
@@ -13,11 +13,15 @@
             <tbody>
                 <% series.forEach( serie => { %>
                     <tr scope="row">
-                        <td scope="col"><a href="/series/sobre/<%- serie._id %>"><%- serie.name %></a></td>
-                        <td scope="col"><%- serie.status %></td>
+                        <td scope="col"><a class="text-capitalize text-dark" href="/series/sobre/<%- serie._id %>"><%- serie.name %></a></td>
+                        <td scope="col"><span class="badge badge-secondary"><%- serie.status %></span></td>
                         <td scope="col">
-                            <a href="/series/editar/<%- serie._id %>">Editar</a>
-                            <a href="/series/excluir/<%- serie._id %>">Excluir</a>
+                            <a class="btn btn-secondary" role="button" href="/series/editar/<%- serie._id %>">
+                                Editar
+                            </a>
+                            <a class="btn button btn-secondary" role="button" href="/series/excluir/<%- serie._id %>">
+                                Excluir
+                            </a>
                         </td>
                     </tr>
                 <% }) %>

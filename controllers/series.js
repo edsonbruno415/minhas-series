@@ -56,7 +56,6 @@ const aboutSerie = async (req, res) => {
 
 const createComment = async ( req, res) => {
     const { name, comment, id } = req.body;
-    console.log(name, comment, id)
     const serie = await Series.findById(id);
     const newComment = await Comment.create({author: name, message: comment });
     serie.comments.push(newComment);
