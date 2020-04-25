@@ -46,7 +46,7 @@
   ```
   - Estando na pasta do projeto, faça o download de todas as dependências do projeto executando esse código no terminal:
   ```
-  npm install' ou 'npm i
+  npm install
   ```
   - Agora para executar o projeto, digite:
   ```
