@@ -5,6 +5,10 @@
         <form action="/series/comentario" method="post">
             <input type="hidden" value="<%- serie._id %>" name="id" />
             <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Digite seu nome" maxlength="45" />
+            </div>
+            <div class="form-group">
                 <label for="comment">Deixe seu comentário</label>
                 <textarea class="form-control" rows="3" id="comment" name="comment"
                     placeholder="Digite aqui a sua mensagem."></textarea>
@@ -12,13 +16,14 @@
             <button type="submit" class="btn btn-secondary">Enviar</button>
         </form>
         <ul class="list-group mt-4 comments">
-            <% serie.comments.forEach( comment => { %>
+            <% for(let comment of serie.comments){ %>
             <li class="list-group-item p-4 mb-2 comment">
-                <p class="comment-content">
-                    <%- comment %>
-                </p>
+                <div class="comment-content">
+                    <p class="text-capitalize font-weight-bold"><%- comment.author %></p>
+                    <p><%- comment.message %></p>
+                </div>
             </li>
-            <% })%>
+            <% }%>
         </ul>
     </div>
 </section>

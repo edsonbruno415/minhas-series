@@ -1,4 +1,4 @@
-const Series = require('../models/series');
+const { Series , Comment } = require('../models/series');
 
 const labels = {
     'to-watch': 'Para Assistir',
@@ -55,9 +55,11 @@ const aboutSerie = async (req, res) => {
 }
 
 const createComment = async ( req, res) => {
-    const { comment, id } = req.body;
+    const { name, comment, id } = req.body;
+    console.log(name, comment, id)
     const serie = await Series.findById(id);
-    serie.comments.push(comment);
+    const newComment = await Comment.create({author: name, message: comment });
+    serie.comments.push(newComment);
     await serie.save();
     res.redirect('/series/sobre/'+id);
 }

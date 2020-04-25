@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const Comment = new Schema({
+    author: {
+        type: String,
+        maxlength: 45
+    },
+    message: String
+});
+
 const Serie = new Schema({
     name: {
         type: String,
@@ -12,9 +20,13 @@ const Serie = new Schema({
         enum: ['to-watch', 'watching', 'watched'],
         required: true
     },
-    comments: [String]
+    comments: [Comment]
 });
 
 const SerieModel = mongoose.model('Serie', Serie);
+const CommentModel = mongoose.model('Comment', Comment);
 
-module.exports = SerieModel;
+module.exports = {
+    Series: SerieModel,
+    Comment: CommentModel
+};
