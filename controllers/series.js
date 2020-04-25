@@ -54,6 +54,14 @@ const aboutSerie = async (req, res) => {
     res.render('sobre-serie', { serie });
 }
 
+const createComment = async ( req, res) => {
+    const { comment, id } = req.body;
+    const serie = await Series.findById(id);
+    serie.comments.push(comment);
+    await serie.save();
+    res.redirect('/series/sobre/'+id);
+}
+
 module.exports = {
     index,
     deleteSerie,
@@ -61,5 +69,6 @@ module.exports = {
     createSerie,
     createUpdateForm,
     updateSerie,
-    aboutSerie
+    aboutSerie,
+    createComment
 }

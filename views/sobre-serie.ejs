@@ -3,21 +3,23 @@
     <div class="container">
         <h2><%- serie.name %></h2>
         <form action="/series/comentario" method="post">
+            <input type="hidden" value="<%- serie._id %>" name="id" />
             <div class="form-group">
-            <label for="comment">Deixe seu comentário</label>
-            <textarea class="form-control" rows="3" id="comment" name="comment" placeholder="Digite aqui a sua mensagem."></textarea>
+                <label for="comment">Deixe seu comentário</label>
+                <textarea class="form-control" rows="3" id="comment" name="comment"
+                    placeholder="Digite aqui a sua mensagem."></textarea>
             </div>
             <button type="submit" class="btn btn-secondary">Enviar</button>
         </form>
-        <div class="comments">
+        <ul class="list-group comments">
             <% serie.comments.forEach( comment => { %>
-                <div class="comment">
-                    <p class="comment-content">
-                        <%- comment %>
-                    </p>
-                </div>
+            <li class="list-group-item comment">
+                <p class="comment-content">
+                    <%- comment %>
+                </p>
+            </li>
             <% })%>
-        </div>
+        </ul>
     </div>
 </section>
 <%- include('./partials/footer') -%>

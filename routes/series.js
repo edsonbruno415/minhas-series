@@ -9,5 +9,6 @@ router.post('/novo-registro', series.createSerie);
 router.get('/editar/:id', series.createUpdateForm);
 router.post('/editar-registro', series.updateSerie);
 router.get('/sobre/:id', series.aboutSerie);
+router.post('/comentario', series.createComment);
 
 module.exports = router;

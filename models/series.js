@@ -9,7 +9,8 @@ const Serie = new Schema({
     },
     status: {
         type: String,
-        enum: ['to-watch', 'watching', 'watched']
+        enum: ['to-watch', 'watching', 'watched'],
+        required: true
     },
     comments: [String]
 });
