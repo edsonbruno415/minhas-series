@@ -10,7 +10,9 @@
 ###### Organizando o banco de dados
 
   - Faça o download do MongoDB em: 
-  ```https://www.mongodb.com/download-center/community```
+  ```
+  https://www.mongodb.com/download-center/community
+  ```
   - Faça o download de algum gerenciador de banco de dados NoSQL, como o Mongo Compass: 
   ```https://www.mongodb.com/download-center/compass```
   - Instale ambos pelos executáveis.
