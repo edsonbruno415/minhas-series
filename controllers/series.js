@@ -1,4 +1,4 @@
-const { Series , Comment } = require('../models/series');
+const { Series, Comment } = require('../models/series');
 
 const labels = {
     'to-watch': 'Para Assistir',
@@ -30,23 +30,33 @@ const createSerie = async (req, res) => {
         res.render('series', { series });
     } catch (error) {
         error.message = `O campo nome é obrigatório.`
-        res.render('createForm', { labels , error });
+        res.render('createForm', { labels, error });
     }
 }
 
 const createNewForm = (req, res) => {
-    res.render('createForm', { labels, error : null });
+    res.render('createForm', { labels, error: null });
 }
 
 const createUpdateForm = async (req, res) => {
     const serie = await Series.findById(req.params.id);
-    res.render('updateForm', { serie, labels });
+    res.render('updateForm', { serie, labels , error: null});
 }
 
 const updateSerie = async (req, res) => {
     const { id, name, status } = req.body;
-    const resp = await Series.updateOne({ _id: id }, { name: name, status: status });
-    res.redirect('/series');
+    try {
+        const serie = await Series.findById({ _id: id });
+        serie.name = name;
+        serie.status = status;
+        await serie.save();
+        res.redirect('/series');
+    }
+    catch (error) {
+        const serie = await Series.findById({ _id: id });
+        error.message = `O campo nome é obrigatório.`
+        res.render('updateForm', { serie, labels, error });
+    }
 }
 
 const aboutSerie = async (req, res) => {
@@ -54,13 +64,13 @@ const aboutSerie = async (req, res) => {
     res.render('sobre-serie', { serie });
 }
 
-const createComment = async ( req, res) => {
+const createComment = async (req, res) => {
     const { name, comment, id } = req.body;
     const serie = await Series.findById(id);
-    const newComment = await Comment.create({author: name, message: comment });
+    const newComment = await Comment.create({ author: name, message: comment });
     serie.comments.push(newComment);
     await serie.save();
-    res.redirect('/series/sobre/'+id);
+    res.redirect('/series/sobre/' + id);
 }
 
 module.exports = {
