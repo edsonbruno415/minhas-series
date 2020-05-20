@@ -4,7 +4,7 @@
   "description": "Projeto desenvolvido durante o curso Fullstack Master do DevPleno",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",

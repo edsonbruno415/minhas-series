@@ -6,12 +6,31 @@ const labels = {
     'watched': 'Assistido'
 }
 
+const pagination = async (model, params) => {
+    const sizePage = parseInt(params.sizePage) || 1;
+    const currentPage = parseInt(params.currentPage) || 0;
+    const count = await model.countDocuments({});
+    const pages = parseInt(count / sizePage);
+    const skipDocs = parseInt(sizePage * currentPage);
+    const series = await model.find({}).skip(skipDocs).limit(sizePage);
+    return {
+        series,
+        pagination: {
+            currentPage,
+            sizePage,
+            pages
+        }
+    }
+}
+
 const index = async (req, res) => {
-    const series = await Series.find({});
-    for (let serie of series) {
+    const data = await pagination(Series,req.query);
+
+    for (let serie of data.series) {
         serie.status = labels[serie.status];
     }
-    res.render('series', { series });
+
+    res.render('series', data);
 }
 
 const deleteSerie = async (req, res) => {
@@ -23,11 +42,7 @@ const deleteSerie = async (req, res) => {
 const createSerie = async (req, res) => {
     try {
         await Series.create(req.body);
-        const series = await Series.find({});
-        for (let serie of series) {
-            serie.status = labels[serie.status];
-        }
-        res.render('series', { series });
+        res.redirect('/series');
     } catch (error) {
         error.message = `O campo nome é obrigatório.`
         res.render('createForm', { labels, error });
