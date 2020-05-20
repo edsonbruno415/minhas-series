@@ -52,7 +52,7 @@
   ```
   npm start
   ```
-  - Pronto! Agora você pode fazer o que quiser com esse projeto. :satisfied:
+  - Pronto! Agora você pode utilizar o projeto como quiser. :satisfied:
   
 ###### Tecnologias utilizadas
 
